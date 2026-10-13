@@ -1,0 +1,45 @@
+{
+	"name": "rpiv-todo-lean",
+	"version": "0.1.0",
+	"description": "Token-lean wrapper around the @juicesharp/rpiv-todo Pi extension: identical behavior, slimmer tool description/schema.",
+	"keywords": [
+		"pi-package",
+		"pi-extension",
+		"rpiv",
+		"todo"
+	],
+	"type": "module",
+	"license": "MIT",
+	"author": "Carsten (lean wrapper); upstream author: juicesharp",
+	"repository": {
+		"type": "git",
+		"url": "https://example.invalid/rpiv-todo-lean"
+	},
+	"main": "src/index.ts",
+	"files": [
+		"src/",
+		"scripts/measure.mjs",
+		"README.md",
+		"MAINTENANCE.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"test": "vitest run",
+		"measure": "node scripts/measure.mjs"
+	},
+	"pi": {
+		"extensions": [
+			"./src/index.ts"
+		]
+	},
+	"dependencies": {
+		"@juicesharp/rpiv-todo": "2.13.8"
+	},
+	"devDependencies": {
+		"@types/node": "^24.0.0",
+		"gpt-tokenizer": "^3.1.0",
+		"jiti": "^2.6.0",
+		"typescript": "^5.9.0",
+		"vitest": "^3.2.0"
+	}
+}
