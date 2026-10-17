@@ -3,7 +3,7 @@
 // - registerTool is intercepted: the upstream definition is captured (it is
 //   the source for the help op) and replaced by the lean definition.
 // - setActiveTools is blocked: the model-visible tool list must stay fixed
-//   for the whole session. Upstream 2.13.8 never calls it; this guard makes
+//   for the whole session. Upstream 2.13.9 never calls it; this guard makes
 //   the guarantee hold even if a future upstream tries.
 // - Everything else (on, registerCommand, registerShortcut, appendEntry, …)
 //   passes through to the real pi object, so all upstream features (overlay,

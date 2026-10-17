@@ -38,7 +38,7 @@ const upRows = [
 	fmtRow("promptSnippet", upstreamTodo.DEFAULT_PROMPT_SNIPPET),
 	fmtRow("promptGuidelines (joined)", upstreamTodo.DEFAULT_PROMPT_GUIDELINES.join("\n")),
 ];
-const upTotal = print(upRows, "UPSTREAM @juicesharp/rpiv-todo 2.13.8");
+const upTotal = print(upRows, "UPSTREAM @juicesharp/rpiv-todo 2.13.9");
 
 const leanPath = resolve(process.argv[2] ?? "src/lean.ts");
 const lean = leanPath.endsWith(".ts")

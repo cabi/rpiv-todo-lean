@@ -8,7 +8,7 @@ Upstream's `todo` tool ships rich descriptions, per-parameter documentation, and
 
 ## Token cost per request
 
-Measured with the o200k_base tokenizer (`npm run measure`), upstream `@juicesharp/rpiv-todo` 2.13.8 vs this wrapper:
+Measured with the o200k_base tokenizer (`npm run measure`), upstream `@juicesharp/rpiv-todo` 2.13.9 vs this wrapper:
 
 | Piece | Upstream chars | Upstream tokens | Lean chars | Lean tokens |
 |---|---:|---:|---:|---:|
@@ -46,7 +46,7 @@ Do **not** load both this and upstream — you would get two `todo` tools. Every
 - **Two ambiguous mistakes become clear errors** instead of being silently ignored by upstream:
   - `update` with `blockedBy` → error explaining `addBlockedBy`/`removeBlockedBy` (upstream ignores `blockedBy` on update).
   - `create` with `status` → error explaining tasks always start `pending` (upstream ignores `status` on create).
-- **The tool list can never change mid-session**: the wrapper blocks `setActiveTools` defensively (upstream 2.13.8 never calls it).
+- **The tool list can never change mid-session**: the wrapper blocks `setActiveTools` defensively (upstream 2.13.9 never calls it).
 
 ## Keeping up with upstream
 

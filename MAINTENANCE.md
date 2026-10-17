@@ -4,7 +4,7 @@ Everything a maintainer needs to keep this wrapper honest against upstream.
 
 ## Matching upstream version
 
-`@juicesharp/rpiv-todo` pinned **exactly** to `2.13.8` in `package.json` (`dependencies`, no range). The wrapper never imports anything not listed here; if upstream renames any of these, tests fail loudly (see "Upgrade checklist").
+`@juicesharp/rpiv-todo` pinned **exactly** to `2.13.9` in `package.json` (`dependencies`, no range). The wrapper never imports anything not listed here; if upstream renames any of these, tests fail loudly (see "Upgrade checklist").
 
 ## What was trimmed, per model-facing piece
 
@@ -42,7 +42,7 @@ Re-run `npm run measure` after any text change; the README table must be updated
   - missing `action`: when `action` is absent/null, `id` is absent/null, and a non-empty `subject` is present, fill `action: "create"` (update/get/delete all require `id`, so this can only be a create; glm-5.3 omitted `action` on creates 9× in 13 upstream-schema sessions, 0× with the lean schema). With `id` + `subject` and no `action` the call is ambiguous (`update` also takes `id` + `subject`; guessing create could silently duplicate a task), so it is deliberately left for Pi's `must have required properties action` error.
 - `validateToolArguments` (pi-ai) clones args, deletes `null` optionals (`normalizeOptionalNulls`), coerces primitive strings (`"3"`→3, `"true"`→true) via `Value.Convert`, then `Compile(schema).Check()`. Consequences: the guards can never misfire on `blockedBy: null` (deleted first), numeric coercion must not be duplicated in fill-ins, and unknown enum values still produce Pi's standard `Validation failed for tool "todo"` error.
 - Enum spellings are **not** normalized by Pi — that is why fill-ins exist at all.
-- `setActiveTools` is blocked on the proxy so the model-visible tool list is fixed for the whole session. Upstream 2.13.8 never calls it; upstream has no loader tool.
+- `setActiveTools` is blocked on the proxy so the model-visible tool list is fixed for the whole session. Upstream 2.13.9 never calls it; upstream has no loader tool.
 
 **Result-envelope assumptions**:
 - Upstream results are `{ content: [{type:"text", text}], details }`. The wrapper's `help` and guard results use the same content shape but omit `details`: upstream's `renderTodoResult` falls back to a plain `✓` glyph when `details` is absent, and `renderCall` renders unknown actions (`help`) as the action word — both verified safe.
@@ -59,7 +59,7 @@ Re-run `npm run measure` after any text change; the README table must be updated
 
 ## Test map
 
-`tests/lean.test.ts` — all modules loaded through jiti, the same loader Pi uses, so the bare `.ts` subpath imports (`@juicesharp/rpiv-todo/index.ts` with internal `.js`→`.ts` resolution) are exercised for real:
+`tests/lean.test.ts` — all modules loaded through jiti, the same loader Pi uses, so the bare `.ts` subpath imports (`@juicesharp/rpiv-todo/index.ts`; upstream's internal imports have used plain `.ts` specifiers since 2.13.9, which jiti resolves natively — before that, `.js` specifiers jiti rewrote) are exercised for real:
 
 - `registration` — lean texts swapped, everything else identical (per-key comparison incl. render functions), config precedence, all human-UI features registered.
 - `lean schema` — every field/type/enum/items/required identical to live upstream (+`help`), descriptions kept only for the four unclear fields.

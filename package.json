@@ -1,6 +1,6 @@
 {
 	"name": "rpiv-todo-lean",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Token-lean wrapper around the @juicesharp/rpiv-todo Pi extension: identical behavior, slimmer tool description/schema.",
 	"keywords": [
 		"pi-package",
@@ -33,7 +33,7 @@
 		]
 	},
 	"dependencies": {
-		"@juicesharp/rpiv-todo": "2.13.8"
+		"@juicesharp/rpiv-todo": "2.13.9"
 	},
 	"devDependencies": {
 		"@types/node": "^24.0.0",

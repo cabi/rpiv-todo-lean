@@ -2,8 +2,10 @@
 //
 // All lean and upstream modules are loaded through jiti — the same loader Pi
 // uses for extensions — so these tests exercise the real production import
-// paths (bare specifiers like "@juicesharp/rpiv-todo/index.ts" with .js -> .ts
-// resolution), not a vite-specific resolution.
+// paths (bare specifiers like "@juicesharp/rpiv-todo/index.ts"; upstream's
+// internal imports use plain .ts specifiers since 2.13.9, which jiti resolves
+// natively — before that they were .js specifiers jiti rewrote), not a
+// vite-specific resolution.
 
 import { describe, expect, it } from "vitest";
 import { createJiti } from "jiti";
@@ -386,7 +388,7 @@ describe("tool list cannot change mid-session", () => {
 		expect(() => proxy.setActiveTools([])).toThrow(/rpiv-todo-lean/);
 	});
 
-	it("upstream 2.13.8 registers nothing but the todo tool, before or after calls", async () => {
+	it("upstream 2.13.9 registers nothing but the todo tool, before or after calls", async () => {
 		const { leanTool, calls } = leanInit();
 		expect(calls.tools.map((t: any) => t.name)).toEqual(["todo"]);
 		await run(leanTool, "s1", { action: "create", subject: "A" });
